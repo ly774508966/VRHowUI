@@ -22,7 +22,7 @@ public class MoverMissile : WeaponBase
 		timeCount = Time.time;
 		Destroy (gameObject, LifeTime);
         Speed += GetComponent<Rigidbody>().velocity.magnitude;
-        Debug.Log("Start speed " + Speed);
+        //Debug.Log("Start speed " + Speed);
     }
 
     private void FixedUpdate ()
