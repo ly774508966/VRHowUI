@@ -22,18 +22,39 @@ public class MoverMissile : WeaponBase
 		timeCount = Time.time;
 		Destroy (gameObject, LifeTime);
         Speed += GetComponent<Rigidbody>().velocity.magnitude;
+        //GetComponent<Rigidbody>().velocity += new Vector3(transform.forward.x * Speed, transform.forward.y * Speed, transform.forward.z * Speed);
         //Debug.Log("Start speed " + Speed);
     }
 
     private void FixedUpdate ()
 	{
+        if (Target)
+        {
+            Debug.Log("has target");
+            Quaternion rotation = Quaternion.LookRotation(Target.transform.position - transform.transform.position);
+            //transform.rotation = Quaternion.Slerp (transform.rotation, rotation, Time.fixedDeltaTime * Damping);
+            transform.rotation = Quaternion.Lerp(transform.rotation, rotation, Time.fixedDeltaTime * 5);
+            Vector3 dir = (Target.transform.position - transform.position).normalized;
+            float direction = Vector3.Dot(dir, transform.forward);
+            if (direction < TargetLockDirection)
+            {
+                Target = null;
+                Debug.Log("lose target");
+            } 
+            else
+            {
+                Debug.Log("direction is " + direction.ToString());
+            }
+        }
+
         GetComponent<Rigidbody>().velocity += new Vector3 (transform.forward.x * Speed * Time.fixedDeltaTime, transform.forward.y * Speed * Time.fixedDeltaTime, transform.forward.z * Speed * Time.fixedDeltaTime);
-		GetComponent<Rigidbody>().velocity += new Vector3 (Random.Range (-Noise.x, Noise.x), Random.Range (-Noise.y, Noise.y), Random.Range (-Noise.z, Noise.z));
-		
-		if (Speed < SpeedMax) {
-			Speed += SpeedMult * Time.fixedDeltaTime;
-		}
-	}
+        //GetComponent<Rigidbody>().velocity += transform.TransformDirection(Vector3.forward * Speed * Time.fixedDeltaTime);
+        //GetComponent<Rigidbody>().velocity += new Vector3 (Random.Range (-Noise.x, Noise.x), Random.Range (-Noise.y, Noise.y), Random.Range (-Noise.z, Noise.z));
+
+        if (Speed < SpeedMax) {
+            Speed += SpeedMult * Time.fixedDeltaTime;
+        }
+    }
 
 	private void Update ()
 	{
@@ -43,6 +64,7 @@ public class MoverMissile : WeaponBase
 			}
 		}
 		
+        /*
 		if (Target) {
 			Quaternion rotation = Quaternion.LookRotation (Target.transform.position - transform.transform.position);
 			//transform.rotation = Quaternion.Slerp (transform.rotation, rotation, Time.deltaTime * Damping);
@@ -53,6 +75,7 @@ public class MoverMissile : WeaponBase
 				Target = null;
 			}
 		}
+        */
 		
 		if (Seeker) {
 			if (timetorock > DurationLock) {
