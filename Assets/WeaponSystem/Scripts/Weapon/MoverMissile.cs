@@ -30,7 +30,7 @@ public class MoverMissile : WeaponBase
 	{
         if (Target)
         {
-            Debug.Log("has target");
+            //Debug.Log("has target");
             Quaternion rotation = Quaternion.LookRotation(Target.transform.position - transform.transform.position);
             //transform.rotation = Quaternion.Slerp (transform.rotation, rotation, Time.fixedDeltaTime * Damping);
             transform.rotation = Quaternion.Lerp(transform.rotation, rotation, Time.fixedDeltaTime * 5);
@@ -39,11 +39,11 @@ public class MoverMissile : WeaponBase
             if (direction < TargetLockDirection)
             {
                 Target = null;
-                Debug.Log("lose target");
+                //Debug.Log("lose target");
             } 
             else
             {
-                Debug.Log("direction is " + direction.ToString());
+                //Debug.Log("direction is " + direction.ToString());
             }
         }
 

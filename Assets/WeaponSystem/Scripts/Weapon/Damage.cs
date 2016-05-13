@@ -57,7 +57,7 @@ public class Damage : DamageBase
             {
                 if (hit.gameObject.GetComponent<DamageManager>())
                 {
-                    hit.gameObject.GetComponent<DamageManager>().ApplyDamage(Damage);
+                    hit.gameObject.GetComponent<DamageManager>().ApplyDamage(Damage, gameObject.tag);
                 }
             }
             if (hit.GetComponent<Rigidbody>())
@@ -70,7 +70,7 @@ public class Damage : DamageBase
     {
         if (collision.gameObject.GetComponent<DamageManager>())
         {
-            collision.gameObject.GetComponent<DamageManager>().ApplyDamage(Damage);
+            collision.gameObject.GetComponent<DamageManager>().ApplyDamage(Damage, gameObject.tag);
         }
     }
 

@@ -214,6 +214,7 @@ public class WeaponLauncher : WeaponBase
 			
 				if (Muzzle) {
 					GameObject muzzle = (GameObject)GameObject.Instantiate (Muzzle, missileposition, missilerotate);
+                    muzzle.tag = this.tag;
 					muzzle.transform.parent = this.transform;
 					GameObject.Destroy (muzzle, MuzzleLifeTime);
 					if (MissileOuter.Length > 0) {
@@ -229,6 +230,7 @@ public class WeaponLauncher : WeaponBase
 					
 					
 						GameObject bullet = (GameObject)Instantiate (Missile, missileposition, missilerotate);
+                        bullet.tag = this.tag;
 					
 						if (bullet.GetComponent<DamageBase> ()) {
 							bullet.GetComponent<DamageBase> ().Owner = Owner;

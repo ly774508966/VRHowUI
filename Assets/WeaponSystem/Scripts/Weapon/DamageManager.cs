@@ -6,13 +6,14 @@ public class DamageManager : MonoBehaviour
     public AudioClip[] HitSound;
     public GameObject Effect;
     public int HP = 100;
+    public int Score = 100;
 
     private void Start()
     {
 
     }
 
-    public void ApplyDamage(int damage)
+    public void ApplyDamage(int damage, string tag)
     {
 		if(HP<0)
 		return;
@@ -25,6 +26,9 @@ public class DamageManager : MonoBehaviour
         if (HP <= 0)
         {
             Dead();
+            GameObject scoreBoardObj = GameObject.Find("ScoreBoard");
+            ScoreBoard scoreBoard = (ScoreBoard)scoreBoardObj.GetComponent(typeof(ScoreBoard));
+            scoreBoard.addScore(tag, Score);
         }
     }
 
