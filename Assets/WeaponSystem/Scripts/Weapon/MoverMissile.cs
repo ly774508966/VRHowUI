@@ -47,7 +47,8 @@ public class MoverMissile : WeaponBase
             }
         }
 
-        GetComponent<Rigidbody>().velocity += new Vector3 (transform.forward.x * Speed * Time.fixedDeltaTime, transform.forward.y * Speed * Time.fixedDeltaTime, transform.forward.z * Speed * Time.fixedDeltaTime);
+        GetComponent<Rigidbody>().velocity = Vector3.Lerp(GetComponent<Rigidbody>().velocity, transform.forward * Speed, Time.fixedDeltaTime * 5);
+        //GetComponent<Rigidbody>().velocity += new Vector3 (transform.forward.x * Speed * Time.fixedDeltaTime, transform.forward.y * Speed * Time.fixedDeltaTime, transform.forward.z * Speed * Time.fixedDeltaTime);
         //GetComponent<Rigidbody>().velocity += transform.TransformDirection(Vector3.forward * Speed * Time.fixedDeltaTime);
         //GetComponent<Rigidbody>().velocity += new Vector3 (Random.Range (-Noise.x, Noise.x), Random.Range (-Noise.y, Noise.y), Random.Range (-Noise.z, Noise.z));
 
