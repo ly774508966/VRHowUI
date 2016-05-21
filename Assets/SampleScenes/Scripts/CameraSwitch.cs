@@ -9,12 +9,18 @@ public class CameraSwitch : MonoBehaviour
 
     private int m_CurrentActiveObject;
 
+	private void Update()
+	{
+	    if (Input.GetButtonUp ("Switch")) {
+			NextCamera ();
+		}
+	}
 
-    private void OnEnable()
-    {
-        text.text = objects[m_CurrentActiveObject].name;
-    }
-
+//    private void OnEnable()
+//    {
+//        text.text = objects[m_CurrentActiveObject].name;
+//    }
+//
 
     public void NextCamera()
     {
@@ -26,6 +32,6 @@ public class CameraSwitch : MonoBehaviour
         }
 
         m_CurrentActiveObject = nextactiveobject;
-        text.text = objects[m_CurrentActiveObject].name;
+//        text.text = objects[m_CurrentActiveObject].name;
     }
 }

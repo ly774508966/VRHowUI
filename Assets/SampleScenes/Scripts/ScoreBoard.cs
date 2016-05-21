@@ -6,6 +6,9 @@ public class ScoreBoard : MonoBehaviour {
     //List<KeyValuePair<string, int>> scoreList = new List<KeyValuePair<string, int>>();
     Dictionary<string, int> scoreList = new Dictionary<string, int> ();
 
+	[SerializeField] private GameObject scoreBoard;
+	private GUIText scoreBoardText;
+
     // Use this for initialization
     void Start () {
         //KeyValuePair<string, int> playerScore = new KeyValuePair<string, int>("PlayerWeapon", 0);
@@ -16,14 +19,16 @@ public class ScoreBoard : MonoBehaviour {
 
         scoreList.Add("PlayerWeapon", 0);
         scoreList.Add("AIWeapon", 0);
+
+		scoreBoardText = scoreBoard.GetComponent<GUIText> ();
     }
 	
 	// Update is called once per frame
 	void Update () {
-        foreach (string key in scoreList.Keys)
-        {
-            Debug.Log(key + " : " + scoreList[key]);
-        }
+//        foreach (string key in scoreList.Keys)
+//        {
+//            Debug.Log(key + " : " + scoreList[key]);
+//        }
     }
 
     public void addScore (string tag, int score){
@@ -31,6 +36,7 @@ public class ScoreBoard : MonoBehaviour {
         {
             if (key.Equals(tag)) {
                 scoreList[key] += score;
+				scoreBoardText.text = "Score : " + scoreList [key];
                 break;
             }
         }
