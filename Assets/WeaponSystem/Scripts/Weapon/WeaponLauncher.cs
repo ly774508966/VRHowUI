@@ -43,6 +43,10 @@ public class WeaponLauncher : WeaponBase
 	public bool Reloading;
 	[HideInInspector]
 	public float ReloadingProcess;
+
+	private Color lockedColor = new Color ();
+	private Color unlockColor = new Color ();
+
 	
 	private void Start ()
 	{
@@ -56,6 +60,11 @@ public class WeaponLauncher : WeaponBase
 			}
 		}
 
+		ColorUtility.TryParseHtmlString  ("#FF8500FF", out lockedColor);
+		ColorUtility.TryParseHtmlString  ("#0000FFFF", out unlockColor);
+
+//		Debug.Log ("lockedColor " + lockedColor.ToString());
+//		Debug.Log ("unlockColor " + unlockColor.ToString());
 	}
 
 	private void Update ()
@@ -95,6 +104,7 @@ public class WeaponLauncher : WeaponBase
 			float direction = Vector3.Dot (dir, transform.forward);
 
 			if (targetdistance > DistanceLock || direction <= AimDirection) {
+				DrawTargetLockon (target, false);
 				Unlock ();
 			}
 		}
@@ -126,11 +136,13 @@ public class WeaponLauncher : WeaponBase
 
 	}
 
+	/*
 	private void DrawTargetLockon (Transform aimtarget, bool locked)
 	{
 		if (!ShowHUD)
 			return;
-		
+
+
 		if (Camera.current) {
 			Vector3 dir = (aimtarget.position - Camera.current.GetComponent<Camera>().transform.position).normalized;
 			float direction = Vector3.Dot (dir, Camera.current.GetComponent<Camera>().transform.forward);
@@ -151,15 +163,33 @@ public class WeaponLauncher : WeaponBase
 			//Debug.Log("Can't Find camera");
 		}
 	}
+	*/
+
+	private void DrawTargetLockon (GameObject target, bool locked)
+	{
+		if (!ShowHUD)
+			return;
+
+		Renderer render = target.GetComponent<Renderer> ();
+
+		if (render != null) {
+			Debug.Log("DrawTargetLockon" + target.ToString() + " " + locked);
+			render.material.color = locked ? lockedColor : unlockColor;
+			//render.material.SetColor ("_MainColor", locked ? lockedColor : unlockColor);
+			//render.material.SetColor ("_TinitColor", locked ? lockedColor : unlockColor);
+		}
+	}
 
 	private void OnGUI ()
 	{
 		if (Seeker) {
            
 			if (target) {
-				DrawTargetLockon (target.transform, true);
+				//DrawTargetLockon (target.transform, true);
+				DrawTargetLockon (target, true);
 			}
             
+			/*
 			for (int t=0; t<TargetTag.Length; t++) {
 				if (GameObject.FindGameObjectsWithTag (TargetTag [t]).Length > 0) {
 					GameObject[] objs = GameObject.FindGameObjectsWithTag (TargetTag [t]);
@@ -170,13 +200,15 @@ public class WeaponLauncher : WeaponBase
 							if (direction >= AimDirection) {
 								float dis = Vector3.Distance (objs [i].transform.position, transform.position);
 								if (DistanceLock > dis) {
-									DrawTargetLockon (objs [i].transform, false);
+									//DrawTargetLockon (objs [i].transform, false);
+									DrawTargetLockon (objs [i], false);
 								}
 							}
 						}
 					}
 				}
 			}
+			*/
 		}
 
 	}
