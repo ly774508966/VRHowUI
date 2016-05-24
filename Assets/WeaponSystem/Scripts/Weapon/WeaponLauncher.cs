@@ -60,8 +60,8 @@ public class WeaponLauncher : WeaponBase
 			}
 		}
 
-		ColorUtility.TryParseHtmlString  ("#FF8500FF", out lockedColor);
-		ColorUtility.TryParseHtmlString  ("#0000FFFF", out unlockColor);
+		ColorUtility.TryParseHtmlString  ("#FF0000FF", out lockedColor);
+		ColorUtility.TryParseHtmlString  ("#FF8500FF", out unlockColor);
 
 //		Debug.Log ("lockedColor " + lockedColor.ToString());
 //		Debug.Log ("unlockColor " + unlockColor.ToString());
