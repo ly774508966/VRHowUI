@@ -10,6 +10,8 @@ public class Damage : DamageBase
 	public float TimeActive = 0;
 	private float timetemp = 0;
 
+
+
     private void Start()
     {
         if (!Owner || !Owner.GetComponent<Collider>()) return;
@@ -57,7 +59,7 @@ public class Damage : DamageBase
             {
                 if (hit.gameObject.GetComponent<DamageManager>())
                 {
-                    hit.gameObject.GetComponent<DamageManager>().ApplyDamage(Damage, gameObject.tag);
+					hit.gameObject.GetComponent<DamageManager>().ApplyDamage(Damage, gameObject.tag, Radio);
                 }
             }
             if (hit.GetComponent<Rigidbody>())
@@ -70,7 +72,7 @@ public class Damage : DamageBase
     {
         if (collision.gameObject.GetComponent<DamageManager>())
         {
-            collision.gameObject.GetComponent<DamageManager>().ApplyDamage(Damage, gameObject.tag);
+			collision.gameObject.GetComponent<DamageManager>().ApplyDamage(Damage, gameObject.tag, Radio);
         }
     }
 

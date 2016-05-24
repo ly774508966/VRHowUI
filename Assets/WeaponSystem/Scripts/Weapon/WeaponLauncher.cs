@@ -44,6 +44,8 @@ public class WeaponLauncher : WeaponBase
 	[HideInInspector]
 	public float ReloadingProcess;
 
+	public int Radio = 1;
+
 	private Color lockedColor = new Color ();
 	private Color unlockColor = new Color ();
 
@@ -266,6 +268,7 @@ public class WeaponLauncher : WeaponBase
 					
 						if (bullet.GetComponent<DamageBase> ()) {
 							bullet.GetComponent<DamageBase> ().Owner = Owner;
+							bullet.GetComponent<DamageBase> ().Radio = Radio;
 						}
 						if (bullet.GetComponent<WeaponBase> ()) {
 							bullet.GetComponent<WeaponBase> ().Owner = Owner;

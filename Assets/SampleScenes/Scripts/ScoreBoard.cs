@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -7,7 +8,7 @@ public class ScoreBoard : MonoBehaviour {
     Dictionary<string, int> scoreList = new Dictionary<string, int> ();
 
 	[SerializeField] private GameObject scoreBoard;
-	private GUIText scoreBoardText;
+	private Text scoreBoardText;
 
     // Use this for initialization
     void Start () {
@@ -20,7 +21,7 @@ public class ScoreBoard : MonoBehaviour {
         scoreList.Add("PlayerWeapon", 0);
         scoreList.Add("AIWeapon", 0);
 
-		scoreBoardText = scoreBoard.GetComponent<GUIText> ();
+		scoreBoardText = scoreBoard.GetComponent<Text> ();
     }
 	
 	// Update is called once per frame

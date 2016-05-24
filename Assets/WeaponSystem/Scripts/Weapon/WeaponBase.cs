@@ -8,6 +8,8 @@ public class DamageBase : MonoBehaviour {
     public GameObject Owner;
     public int Damage = 20;
 	public string[] TargetTag = new string[1]{"Enemy"};
+
+	public int Radio = 1;
 }
 
 public class WeaponBase : MonoBehaviour {

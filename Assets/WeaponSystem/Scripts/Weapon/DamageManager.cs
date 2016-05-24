@@ -13,7 +13,7 @@ public class DamageManager : MonoBehaviour
 
     }
 
-    public void ApplyDamage(int damage, string tag)
+	public void ApplyDamage(int damage, string tag, int radio)
     {
 		if(HP<0)
 		return;
@@ -28,7 +28,7 @@ public class DamageManager : MonoBehaviour
             Dead();
             GameObject scoreBoardObj = GameObject.Find("ScoreBoard");
             ScoreBoard scoreBoard = (ScoreBoard)scoreBoardObj.GetComponent(typeof(ScoreBoard));
-            scoreBoard.addScore(tag, Score);
+			scoreBoard.addScore(tag, Score * radio);
         }
     }
 
