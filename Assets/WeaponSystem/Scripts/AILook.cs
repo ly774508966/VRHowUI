@@ -19,7 +19,8 @@ public class AILook : MonoBehaviour {
 		
 		if(target){
 			Quaternion targetlook = Quaternion.LookRotation(target.transform.position - this.transform.position);
-			this.transform.rotation = Quaternion.Lerp(this.transform.rotation,targetlook,Time.deltaTime * 3);
+			//this.transform.rotation = Quaternion.Lerp(this.transform.rotation,targetlook,Time.deltaTime * 3);
+			this.transform.rotation = Quaternion.Lerp(this.transform.rotation,targetlook, 1f);
 			
 			Vector3 dir = (target.transform.position - transform.position).normalized;
             float direction = Vector3.Dot(dir, transform.forward);
@@ -49,9 +50,15 @@ public class AILook : MonoBehaviour {
                     {
 						// Select closer target
                         distance = dis;
+							Debug.Log ("distane : " + distance);
                         target = objs[i];
 						if(weapon){
 							indexWeapon = Random.Range(0,weapon.WeaponLists.Length);
+								if (distance > 1000) {
+									indexWeapon = 0;
+								} else {
+									indexWeapon = 1;
+								}
 						}
 						timeAIattack = Time.time;
 					}
