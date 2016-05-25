@@ -26,23 +26,23 @@ public class Spawner : MonoBehaviour
     }
 
 	private void SpawnAuto () {
-				if(!ObjectSpawn)
-					return;
-				
-		        GameObject[] gos = GameObject.FindGameObjectsWithTag("Enemy");
+		if(!ObjectSpawn)
+			return;
 		
-		        if (gos.Length < ObjectCount)
-		        {
-		            if (Time.time >= timeSpawnTemp + TimeSpawn)
-		            {
-		                GameObject enemyCreated = (GameObject)Instantiate(ObjectSpawn,transform.position +new Vector3(Random.Range(-Radiun, Radiun), 20, Random.Range(-Radiun, Radiun)),Quaternion.identity);
-		                float scale = Random.Range(5, 20);
-						enemyCreated.transform.localScale = new Vector3(scale, scale, scale);
-		
-		                timeSpawnTemp = Time.time;
-		
-		            }
-		        }
+        GameObject[] gos = GameObject.FindGameObjectsWithTag("Enemy");
+
+        if (gos.Length < ObjectCount)
+        {
+            if (Time.time >= timeSpawnTemp + TimeSpawn)
+            {
+                GameObject enemyCreated = (GameObject)Instantiate(ObjectSpawn,transform.position +new Vector3(Random.Range(-Radiun, Radiun), 20, Random.Range(-Radiun, Radiun)),Quaternion.identity);
+                float scale = Random.Range(5, 20);
+				enemyCreated.transform.localScale = new Vector3(scale, scale, scale);
+
+                timeSpawnTemp = Time.time;
+
+            }
+        }
 	}
 
 	private void SpawnAll (GameObject obj, int count) {

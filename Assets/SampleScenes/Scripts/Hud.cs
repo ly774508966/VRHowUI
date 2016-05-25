@@ -3,12 +3,15 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
-public class ScoreBoard : MonoBehaviour {
+public class Hud : MonoBehaviour {
     //List<KeyValuePair<string, int>> scoreList = new List<KeyValuePair<string, int>>();
     Dictionary<string, int> scoreList = new Dictionary<string, int> ();
 
-	[SerializeField] private GameObject scoreBoard;
-	private Text scoreBoardText;
+//	[SerializeField] private GameObject scoreBoard;
+//	private Text scoreBoardText;
+
+	[SerializeField] private Text scoreBoardText;
+	[SerializeField] private Text healthText;
 
     // Use this for initialization
     void Start () {
@@ -21,7 +24,7 @@ public class ScoreBoard : MonoBehaviour {
         scoreList.Add("PlayerWeapon", 0);
         scoreList.Add("AIWeapon", 0);
 
-		scoreBoardText = scoreBoard.GetComponent<Text> ();
+		//scoreBoardText = scoreBoard.GetComponent<Text> ();
     }
 	
 	// Update is called once per frame
@@ -42,4 +45,13 @@ public class ScoreBoard : MonoBehaviour {
             }
         }
     }
+
+	public void displayHealth (int health) {
+		healthText.text = "Health : " + health;
+		if (health <= 600) {
+			healthText.color = Color.yellow;
+		} else if (health <= 200) {
+			healthText.color = Color.red;
+		}
+	}
 }

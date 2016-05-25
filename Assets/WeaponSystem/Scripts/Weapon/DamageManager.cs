@@ -8,9 +8,16 @@ public class DamageManager : MonoBehaviour
     public int HP = 100;
     public int Score = 100;
 
+	private Hud hud;
+
     private void Start()
     {
-
+		GameObject hudObj = GameObject.Find("Hud");
+		if (hudObj) {
+			hud = (Hud)hudObj.GetComponent (typeof(Hud));
+		} else {
+			Debug.Log ("not find hud");
+		}
     }
 
 	public void ApplyDamage(int damage, string tag, int radio)
@@ -23,13 +30,20 @@ public class DamageManager : MonoBehaviour
             AudioSource.PlayClipAtPoint(HitSound[Random.Range(0, HitSound.Length)], transform.position);
         }
         HP -= damage;
-        if (HP <= 0)
-        {
-            Dead();
-            GameObject scoreBoardObj = GameObject.Find("ScoreBoard");
-            ScoreBoard scoreBoard = (ScoreBoard)scoreBoardObj.GetComponent(typeof(ScoreBoard));
-			scoreBoard.addScore(tag, Score * radio);
-        }
+
+		if (gameObject.tag.Equals ("Player")) {
+			if (hud) {
+				hud.displayHealth (HP);
+			}
+		}
+
+		if (HP <= 0) {
+			Dead ();
+
+			if (hud) {
+				hud.addScore (tag, Score * radio);
+			}
+		}
     }
 
     private void Dead()
