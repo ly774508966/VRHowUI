@@ -15,22 +15,13 @@ public class Spawner : MonoBehaviour
         if (GetComponent<Renderer>())
             GetComponent<Renderer>().enabled = false;
 
-		SpawnAll (ObjectSpawn, ObjectCount);
+		//SpawnAll (ObjectSpawn, ObjectCount);
 
-//        System.Threading.Timer timer = null; 
-//        timer = new System.Threading.Timer((obj) =>
-//                    {
-//				        SpawnAI();
-//                        timer.Dispose();
-//                    }, 
-//                null, 5000, System.Threading.Timeout.Infinite);
+		Invoke("Spawn", 10.0f);
     }
 
-	private void SpawnAI () {
-		GameObject AI = GameObject.Find("TankAI");
-		if (AI) {
-			AI.SetActive(true);
-		}
+	private void Spawn () {
+		SpawnAll (ObjectSpawn, ObjectCount);
 	}
 
     private void Update()
