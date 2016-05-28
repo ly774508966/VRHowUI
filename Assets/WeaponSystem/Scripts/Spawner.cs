@@ -7,8 +7,11 @@ public class Spawner : MonoBehaviour
     private float timeSpawnTemp = 0;
 	public float TimeSpawn = 20;
     public int ObjectCount = 0;
+	public float DelayToSpawn = 6;
     public int Radiun;
 	public bool KeepCount = false;
+
+	private bool Ready = false;
 
     private void Start()
     {
@@ -17,8 +20,12 @@ public class Spawner : MonoBehaviour
 
 		//SpawnAll (ObjectSpawn, ObjectCount);
 
-		Invoke("Spawn", 10.0f);
+		Invoke("SetReadyToSpawn", DelayToSpawn);
     }
+
+	private void SetReadyToSpawn () {
+		Ready = true;
+	}
 
 	private void Spawn () {
 		SpawnAll (ObjectSpawn, ObjectCount);
@@ -26,6 +33,10 @@ public class Spawner : MonoBehaviour
 
     private void Update()
     {
+		if (!Ready) {
+			return;
+		}
+
 		if (KeepCount) {
 			SpawnAuto ();
 		}
@@ -35,7 +46,7 @@ public class Spawner : MonoBehaviour
 		if(!ObjectSpawn)
 			return;
 		
-        GameObject[] gos = GameObject.FindGameObjectsWithTag("Enemy");
+		GameObject[] gos = GameObject.FindGameObjectsWithTag(ObjectSpawn.tag);
 
         if (gos.Length < ObjectCount)
         {
