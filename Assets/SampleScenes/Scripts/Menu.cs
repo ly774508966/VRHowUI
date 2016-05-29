@@ -12,9 +12,17 @@ public class Menu : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (Input.GetKeyDown ("joystick button 0")) {
-			Debug.Log ("SinglePlayer!!!");
-
-			SceneManager.LoadScene("AircraftJet2Axis");
+			SceneManager.LoadScene ("SinglePlayer");
+		} else if (Input.GetKeyDown ("a")) {
+			SceneManager.LoadScene ("SinglePlayer");
+		} else if (Input.GetKeyDown ("joystick button 1")) {
+			SceneManager.LoadScene ("MultiPlayer");
+		} else if (Input.GetKeyDown ("b")) {
+			SceneManager.LoadScene ("MultiPlayer");
+		} else if (Input.GetKeyDown ("joystick button 2")) {
+			SceneManager.LoadScene ("Settings");
+		} else if (Input.GetKeyDown ("x")) {
+			SceneManager.LoadScene ("Settings");
 		}
 	}
 }

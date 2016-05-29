@@ -33,12 +33,12 @@ public class WeaponController : MonoBehaviour
         {
             LaunchWeapon(2);
         }
-        else if (Input.GetButtonUp("Cancel"))
-        {
-            //SceneManager.LoadScene(SceneManager.GetSceneAt(0).path);
-            Scene scene = SceneManager.GetActiveScene();
-            SceneManager.LoadScene(scene.name);
-        }
+//        else if (Input.GetButtonUp("Cancel"))
+//        {
+//            //SceneManager.LoadScene(SceneManager.GetSceneAt(0).path);
+//            Scene scene = SceneManager.GetActiveScene();
+//            SceneManager.LoadScene(scene.name);
+//        }
 
         //float h = Input.GetAxis("Horizontal");
         //float v = Input.GetAxis("Vertical");

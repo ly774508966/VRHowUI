@@ -50,7 +50,7 @@ public class AILook : MonoBehaviour {
                     {
 						// Select closer target
                         distance = dis;
-							Debug.Log ("distane : " + distance);
+							//Debug.Log ("distane : " + distance);
                         target = objs[i];
 						if(weapon){
 							indexWeapon = Random.Range(0,weapon.WeaponLists.Length);
