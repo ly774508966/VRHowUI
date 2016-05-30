@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 using UnityEngine.Networking;
 
-public class GameControlNetwork : NetworkBehaviour {
+public class GameControlNetwork : MonoBehaviour {
 
     public NetworkDiscovery discovery;
     
@@ -22,12 +22,18 @@ public class GameControlNetwork : NetworkBehaviour {
 		}
 
 		if (Input.GetKeyDown ("joystick button 0")) {
+			Debug.Log ("AAAAA");
+			NetworkManager.singleton.StartHost();
 			discovery.StartAsServer ();
 		} else if (Input.GetKeyDown ("a")) {
+			Debug.Log ("AAAAA");
+			NetworkManager.singleton.StartHost();
 			discovery.StartAsServer ();
 		} else if (Input.GetKeyDown ("joystick button 1")) {
+			Debug.Log ("BBBBB");
 			discovery.StartAsClient ();
 		} else if (Input.GetKeyDown ("b")) {
+			Debug.Log ("BBBBB");
 			discovery.StartAsClient ();
 		}
 	}

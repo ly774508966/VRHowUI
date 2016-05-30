@@ -16,9 +16,9 @@ public class Menu : MonoBehaviour {
 		} else if (Input.GetKeyDown ("a")) {
 			SceneManager.LoadScene ("SinglePlayer");
 		} else if (Input.GetKeyDown ("joystick button 1")) {
-			SceneManager.LoadScene ("MultiPlayer");
+			SceneManager.LoadScene ("Lobby");
 		} else if (Input.GetKeyDown ("b")) {
-			SceneManager.LoadScene ("MultiPlayer");
+			SceneManager.LoadScene ("Lobby");
 		} else if (Input.GetKeyDown ("joystick button 2")) {
 			SceneManager.LoadScene ("Settings");
 		} else if (Input.GetKeyDown ("x")) {
