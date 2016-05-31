@@ -9,6 +9,7 @@ public class OverriddenNetworkDiscovery : NetworkDiscovery
     {
 		Debug.Log ("OnReceivedBroadcast " + fromAddress + " " + data);
 
+        this.StopBroadcast();
         NetworkManager.singleton.networkAddress = fromAddress;
         NetworkManager.singleton.StartClient();
     }
