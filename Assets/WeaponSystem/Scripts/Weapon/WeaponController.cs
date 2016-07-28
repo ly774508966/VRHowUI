@@ -15,7 +15,7 @@ public class WeaponController : MonoBehaviour
     {
         if (Input.GetButton("Fire1"))
         {
-            LaunchWeapon();
+            //LaunchWeapon();
         }
         else if (Input.GetButtonUp("Switch"))
         {
