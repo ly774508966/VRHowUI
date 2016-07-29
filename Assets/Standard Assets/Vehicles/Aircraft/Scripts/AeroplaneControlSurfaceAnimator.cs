@@ -19,7 +19,11 @@ namespace UnityStandardAssets.Vehicles.Aeroplane
             // Store the original local rotation of each surface, so we can rotate relative to this
             foreach (var surface in m_ControlSurfaces)
             {
-                surface.originalLocalRotation = surface.transform.localRotation;
+                if (surface != null && surface.originalLocalRotation != null && surface.transform != null)
+                {
+                    surface.originalLocalRotation = surface.transform.localRotation;
+                }
+                //surface.originalLocalRotation = surface.transform.localRotation;
             }
         }
 
@@ -79,8 +83,11 @@ namespace UnityStandardAssets.Vehicles.Aeroplane
             Quaternion target = surface.originalLocalRotation*rotation;
 
             // Slerp the surface's rotation towards the target rotation.
-            surface.transform.localRotation = Quaternion.Slerp(surface.transform.localRotation, target,
-                                                               m_Smoothing*Time.deltaTime);
+            if (surface.transform != null)
+            {
+                surface.transform.localRotation = Quaternion.Slerp(surface.transform.localRotation, target,
+                                                   m_Smoothing * Time.deltaTime);
+            }
         }
 
 
