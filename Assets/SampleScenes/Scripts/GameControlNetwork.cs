@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
 using UnityEngine.Networking;
+using UnityStandardAssets.CrossPlatformInput;
 
 public class GameControlNetwork : MonoBehaviour {
 
@@ -25,14 +26,14 @@ public class GameControlNetwork : MonoBehaviour {
 			Debug.Log ("AAAAA");
 			NetworkManager.singleton.StartHost();
 			discovery.StartAsServer ();
-		} else if (Input.GetKeyDown ("a")) {
+		} else if (CrossPlatformInputManager.GetButton ("a")) {
 			Debug.Log ("AAAAA");
 			NetworkManager.singleton.StartHost();
 			discovery.StartAsServer ();
 		} else if (Input.GetKeyDown ("joystick button 1")) {
 			Debug.Log ("BBBBB");
 			discovery.StartAsClient ();
-		} else if (Input.GetKeyDown ("b")) {
+		} else if (CrossPlatformInputManager.GetButton ("b")) {
 			Debug.Log ("BBBBB");
 			discovery.StartAsClient ();
 		}

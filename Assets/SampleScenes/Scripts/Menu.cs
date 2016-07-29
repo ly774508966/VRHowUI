@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using UnityStandardAssets.CrossPlatformInput;
 
 public class Menu : MonoBehaviour {
 
@@ -13,15 +14,15 @@ public class Menu : MonoBehaviour {
 	void Update () {
 		if (Input.GetKeyDown ("joystick button 0")) {
 			SceneManager.LoadScene ("SinglePlayer");
-		} else if (Input.GetKeyDown ("a")) {
+		} else if (CrossPlatformInputManager.GetButton ("a")) {
 			SceneManager.LoadScene ("SinglePlayer");
 		} else if (Input.GetKeyDown ("joystick button 1")) {
 			SceneManager.LoadScene ("Lobby");
-		} else if (Input.GetKeyDown ("b")) {
+		} else if (CrossPlatformInputManager.GetButton ("b")) {
 			SceneManager.LoadScene ("Lobby");
 		} else if (Input.GetKeyDown ("joystick button 2")) {
 			SceneManager.LoadScene ("Settings");
-		} else if (Input.GetKeyDown ("x")) {
+		} else if (CrossPlatformInputManager.GetButton ("x")) {
 			SceneManager.LoadScene ("Settings");
 		}
 	}

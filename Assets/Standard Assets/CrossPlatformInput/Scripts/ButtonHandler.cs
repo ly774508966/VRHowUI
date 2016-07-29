@@ -10,7 +10,7 @@ namespace UnityStandardAssets.CrossPlatformInput
 
         void OnEnable()
         {
-
+            Debug.Log("OnEnable " + Name);
         }
 
         public void SetDownState()
@@ -24,6 +24,11 @@ namespace UnityStandardAssets.CrossPlatformInput
         {
             CrossPlatformInputManager.SetButtonUp(Name);
             Debug.Log("SetUpState " + Name);
+        }
+
+        public void SetClieckState()
+        {
+            Debug.Log("SetClieckState " + Name);
         }
 
 

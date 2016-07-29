@@ -1,26 +1,37 @@
 using System;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityStandardAssets.CrossPlatformInput;
 
 public class CameraSwitch : MonoBehaviour
 {
     public GameObject[] objects;
-    public Text text;
+    //public Text text;
 
     private int m_CurrentActiveObject;
 
 	private void Update()
 	{
-	    if (Input.GetButtonUp ("Switch")) {
+	    if (CrossPlatformInputManager.GetButtonUp ("Switch")) {
+            Debug.Log("Switch");
 			NextCamera ();
 		}
 	}
 
-//    private void OnEnable()
-//    {
-//        text.text = objects[m_CurrentActiveObject].name;
-//    }
-//
+    private void OnEnable()
+    {
+        if (objects.Length >= 2 && objects[0] != null)
+        {
+            objects[0].SetActive(true);
+            for (int i = 1; i < objects.Length; i++)
+            {
+                objects[i].SetActive(false);
+            }
+        }
+
+        m_CurrentActiveObject = 0;
+    }
+
 
     public void NextCamera()
     {

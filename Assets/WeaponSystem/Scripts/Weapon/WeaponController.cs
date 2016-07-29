@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using UnityStandardAssets.CrossPlatformInput;
 
 public class WeaponController : MonoBehaviour
 {
@@ -13,23 +14,23 @@ public class WeaponController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetButton("Fire1"))
+        if (CrossPlatformInputManager.GetButton("Fire1"))
         {
             //LaunchWeapon();
         }
-        else if (Input.GetButtonUp("Switch"))
+        else if (CrossPlatformInputManager.GetButtonUp("Switch"))
         {
             SwitchWeapon();
         }
-        else if (Input.GetButton("FireGun"))
+        else if (CrossPlatformInputManager.GetButton("FireGun"))
         {
             LaunchWeapon(0);
         }
-        else if (Input.GetButtonUp("FireLeft"))
+        else if (CrossPlatformInputManager.GetButtonUp("FireLeft"))
         {
             LaunchWeapon(1);
         }
-        else if (Input.GetButtonUp("FireRight"))
+        else if (CrossPlatformInputManager.GetButtonUp("FireRight"))
         {
             LaunchWeapon(2);
         }
