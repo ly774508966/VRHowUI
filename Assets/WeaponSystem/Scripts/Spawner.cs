@@ -10,6 +10,7 @@ public class Spawner : MonoBehaviour
 	public float DelayToSpawn = 6;
     public int Radiun;
 	public bool KeepCount = false;
+    public bool ObjectScale = true;
 
 	private bool Ready = false;
 
@@ -53,8 +54,11 @@ public class Spawner : MonoBehaviour
             if (Time.time >= timeSpawnTemp + TimeSpawn)
             {
                 GameObject enemyCreated = (GameObject)Instantiate(ObjectSpawn,transform.position +new Vector3(Random.Range(-Radiun, Radiun), 20, Random.Range(-Radiun, Radiun)),Quaternion.identity);
-                float scale = Random.Range(5, 20);
-				enemyCreated.transform.localScale = new Vector3(scale, scale, scale);
+                if (ObjectScale)
+                {
+                    float scale = Random.Range(5, 20);
+                    enemyCreated.transform.localScale = new Vector3(scale, scale, scale);
+                }
 
                 timeSpawnTemp = Time.time;
 

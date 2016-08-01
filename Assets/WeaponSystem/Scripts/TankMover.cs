@@ -11,7 +11,7 @@ public class TankMover : MonoBehaviour {
 	}
 
 	void Update () {
-		this.transform.Rotate(new Vector3(0, Random.Range(-10.0F,10.0F) * TurnSpeed * Time.deltaTime,0));
-		this.transform.position += this.transform.forward * Random.Range(-1.0F, 1.0F) * Speed* Time.deltaTime;
+		//this.transform.Rotate(new Vector3(0, Random.Range(-10.0F,10.0F) * TurnSpeed * Time.deltaTime,0));
+		//this.transform.position += this.transform.forward * Random.Range(-1.0F, 1.0F) * Speed* Time.deltaTime;
 	}
 }
