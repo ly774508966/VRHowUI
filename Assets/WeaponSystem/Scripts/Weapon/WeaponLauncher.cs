@@ -172,6 +172,10 @@ public class WeaponLauncher : WeaponBase
 		if (!ShowHUD)
 			return;
 
+        if ("TankAI".Equals(target.name)){
+            return;
+        }
+
 		Renderer render = target.GetComponent<Renderer> ();
 
 		if (render != null) {
