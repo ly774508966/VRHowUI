@@ -1,0 +1,49 @@
+
+import "UnityEngine"
+import "AeroplaneAiControl"
+
+if not UnityEngine.GameObject or not  UnityEngine.UI then
+	error("Click Make/All to generate lua wrap file")
+end
+
+local aiComponent = {}
+
+local player
+local controller
+
+function aiComponent:Init( gameObject )
+	Debug.Log(gameObject.name.."###Init")
+
+	player = GameObject.Find("AircraftJet_LOD")
+    controller = gameObject:GetComponent("AeroplaneAiControl")
+
+    Debug.log("###player:"..player)
+    Debug.log("###controller:"..controller)
+end
+
+function aiComponent:Awake( gameObject )
+	Debug.Log(gameObject.name.."###Awake")
+end
+
+function aiComponent:Start( gameObject )
+	Debug.Log(gameObject.name.."###Start")
+
+	player = GameObject.Find("AircraftJet_LOD")
+    controller = gameObject.GetComponent("UnityStandardAssets.Vehicles.Aeroplane.AeroplaneAiControl")
+
+    Debug.log("###player:"..player)
+    Debug.log("###controller:"..controller)
+end
+
+function aiComponent:Update( gameObject )
+    Debug.Log(gameObject.name.."###Update")
+	if controller then
+	    controller.SetTarget(player.transform)
+	end
+end
+
+function main()
+    return aiComponent
+end
+
+return aiComponent

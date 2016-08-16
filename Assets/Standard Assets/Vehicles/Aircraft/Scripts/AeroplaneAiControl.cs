@@ -5,6 +5,7 @@ using Random = UnityEngine.Random;
 namespace UnityStandardAssets.Vehicles.Aeroplane
 {
     [RequireComponent(typeof (AeroplaneController))]
+
     public class AeroplaneAiControl : MonoBehaviour
     {
         // This script represents an AI 'pilot' capable of flying the plane towards a designated target.

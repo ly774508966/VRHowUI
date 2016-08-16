@@ -172,14 +172,14 @@ public class WeaponLauncher : WeaponBase
 		if (!ShowHUD)
 			return;
 
-        if ("TankAI".Equals(target.name)){
+        if ("AI".Equals(target.tag)){
             return;
         }
 
 		Renderer render = target.GetComponent<Renderer> ();
 
 		if (render != null) {
-			Debug.Log("DrawTargetLockon" + target.ToString() + " " + locked);
+			//Debug.Log("DrawTargetLockon" + target.ToString() + " " + locked);
 			render.material.color = locked ? lockedColor : unlockColor;
 			//render.material.SetColor ("_MainColor", locked ? lockedColor : unlockColor);
 			//render.material.SetColor ("_TinitColor", locked ? lockedColor : unlockColor);
@@ -192,7 +192,7 @@ public class WeaponLauncher : WeaponBase
            
 			if (target) {
 				//DrawTargetLockon (target.transform, true);
-				DrawTargetLockon (target, true);
+				//DrawTargetLockon (target, true);
 			}
             
 			/*
