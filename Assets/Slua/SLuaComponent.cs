@@ -25,12 +25,10 @@ public class SLuaComponent : MonoBehaviour
         svr.init(null, () =>
         {
             self = (LuaTable)svr.start(m_luaScript.name);
-            Debug.Log("###LuaTable### " + self.ToString());
-            AeroplaneAiControl aiControl = this.GetComponent<AeroplaneAiControl>();
-            Debug.Log("AeroplaneAiControl " + aiControl.ToString());
             init = (LuaFunction)self["Init"];
             if (init != null)
             {
+                //GameObject player = GameObject.Find("AircraftJet_LOD");
                 init.call(self, this);
             }
             start = (LuaFunction)self["Start"];

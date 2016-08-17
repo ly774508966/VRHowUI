@@ -1,17 +1,23 @@
 -- 加载常用的Unity接口
-luanet.load_assembly('UnityEngine')
-luanet.load_assembly('Assembly-CSharp')
+-- luanet.load_assembly('UnityEngine')
+-- luanet.load_assembly('Assembly-CSharp')
 
 --导入引擎常用的class
-Debug = luanet.import_type('UnityEngine.Debug')
-GameObject = luanet.import_type('UnityEngine.GameObject')
-Transform = luanet.import_type('UnityEngine.Transform')
-Vector3 = luanet.import_type('UnityEngine.Vector3')
-Time = luanet.import_type('UnityEngine.Time')
+-- Debug = luanet.import_type('UnityEngine.Debug')
+-- GameObject = luanet.import_type('UnityEngine.GameObject')
+-- Transform = luanet.import_type('UnityEngine.Transform')
+-- Vector3 = luanet.import_type('UnityEngine.Vector3')
+-- Time = luanet.import_type('UnityEngine.Time')
 
 --导入游戏项目常用的组件
-LuaComponent = luanet.import_type('LuaComponent')
-AeroplaneAiControl = luanet.import_type('MyAeroplaneAiControl')
+-- LuaComponent = luanet.import_type('LuaComponent')
+-- AeroplaneAiControl = luanet.import_type('MyAeroplaneAiControl')
+
+Debug = require "UnityEngine.Debug"
+GameObject = require "UnityEngine.GameObject"
+Transform = require "UnityEngine.Transform"
+Vector3 = require "UnityEngine.Vector3"
+MyAeroplaneAiControl = require "MyAeroplaneAiControl"
 
 local aiComponent = {}
 

@@ -8,8 +8,8 @@ using System.Reflection;
 
 public static class CustomSettings
 {
-    public static string saveDir = Application.dataPath + "/ThirdParty/ULua/Source/Generate/";    
-    public static string toluaBaseType = Application.dataPath + "/ThirdParty/ULua/ToLua/BaseType/";    
+    public static string saveDir = Application.dataPath + "/ThirdParty/Ulua/Source/Generate/";    
+    public static string toluaBaseType = Application.dataPath + "/ThirdParty/Ulua/ToLua/BaseType/";    
 
     //导出时强制做为静态类的类型(注意customTypeList 还要添加这个类型才能导出)
     //unity 有些类作为sealed class, 其实完全等价于静态类
@@ -49,7 +49,7 @@ public static class CustomSettings
         //_GT(typeof(TestExport)),
         //_GT(typeof(TestExport.Space)),
         //-------------------------------------------------------------------     
-        _GT(typeof(AeroplaneAiControl)),
+        _GT(typeof(MyAeroplaneAiControl)),
 
         _GT(typeof(Debugger)).SetNameSpace(null),        
 
