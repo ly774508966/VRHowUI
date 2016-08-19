@@ -19,6 +19,7 @@ namespace UnityStandardAssets.Vehicles.Aeroplane
         [SerializeField] private float m_SpeedEffect = 0.01f;           // This increases the effect of the controls based on the plane's speed.
         [SerializeField] private float m_TakeoffHeight = 20;            // the AI will fly straight and only pitch upwards until reaching this height
         [SerializeField] private Transform m_Target;                    // the target to fly towards
+        [SerializeField] private Vector3 m_TargetVec;
 
         private AeroplaneController m_AeroplaneController;  // The aeroplane controller that is used to move the plane
         private float m_RandomPerlin;                       // Used for generating random point on perlin noise so that the plane will wander off path slightly
@@ -46,10 +47,12 @@ namespace UnityStandardAssets.Vehicles.Aeroplane
         // fixed update is called in time with the physics system update
         private void FixedUpdate()
         {
-            if (m_Target != null)
+            if (m_Target != null || m_TargetVec != null)
             {
+                Vector3 p = m_TargetVec != null ? m_TargetVec : m_Target.position;
+
                 // make the plane wander from the path, useful for making the AI seem more human, less robotic.
-                Vector3 targetPos = m_Target.position +
+                Vector3 targetPos = p +
                                     transform.right*
                                     (Mathf.PerlinNoise(Time.time*m_LateralWanderSpeed, m_RandomPerlin)*2 - 1)*
                                     m_LateralWanderDistance;
@@ -113,6 +116,11 @@ namespace UnityStandardAssets.Vehicles.Aeroplane
         public void SetTarget(Transform target)
         {
             m_Target = target;
+        }
+
+        public void SetTarget(Vector3 target)
+        {
+            m_TargetVec = target;
         }
     }
 }
