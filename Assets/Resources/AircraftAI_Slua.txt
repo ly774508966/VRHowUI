@@ -1,3 +1,6 @@
+-- p = debug.getinfo(1).source
+
+local BT = require 'lib.behaviour_tree'
 
 import "UnityEngine"
 import "MyAeroplaneAiControl"
@@ -6,9 +9,10 @@ if not UnityEngine.GameObject or not  UnityEngine.UI then
 	error("Click Make/All to generate lua wrap file")
 end
 
-local BT = require('lib/behaviour_tree')
+
 local aiComponent = {}
 
+local ai
 local player
 local controller
 local target
@@ -18,27 +22,24 @@ function flyingTask:run()
   print("running")
 
   if target then
-   local distance = Vector3.Distance(gameObject.transform.position, target.position)
+   local distance = Vector3.Distance(ai.transform.position, target)
    if (distance < 5) then
-       target = player.transform;
-       controller:SetTarget(player.transform)
-   end
+     self:success()
    else
-   target = player.transform;
-   controller:SetTarget(player.transform)
-	end
-  if count == 10 then
-    self:success()
+     self:running()
+   end
   else
-    self:running()
+     self:success()
   end
 end
 
 local targetTask = BT.Task:new()
 function flyingTask:run()
   print("targeting")
-  local v = Random.onUnitSphere() * 1000
+  local v = Random.onUnitSphere * 1000
+  v.y = v.y + 1250
   controller:SetTarget(v)
+  target = v
   self:success()
 end
 
@@ -56,6 +57,7 @@ local Frank = BT:new({
 function aiComponent:Init( gameObject )
 	Debug.Log(gameObject.name.."###Init")
 
+	ai = gameObject
 	player = GameObject.Find("AircraftJet_LOD")
     controller = gameObject:GetComponent("MyAeroplaneAiControl")
 end
@@ -70,8 +72,12 @@ end
 
 function aiComponent:Update( gameObject )
     Debug.Log(gameObject.name.."###Update")
+
+    Frank:run();
+
 	-- print("player.transform ", player.transform.position.x, player.transform.position.y, player.transform.position.z)
 
+	--[[
 	if target then
 	   local distance = Vector3.Distance(gameObject.transform.position, target.position)
 	   if (distance < 5) then
@@ -82,6 +88,7 @@ function aiComponent:Update( gameObject )
 	   target = player.transform;
 	   controller:SetTarget(player.transform)
 	end
+	]]
 end
 
 function main ()
