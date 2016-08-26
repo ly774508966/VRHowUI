@@ -28,13 +28,14 @@ public class MoverMissile : WeaponBase
 
     private void FixedUpdate ()
 	{
-        float delta = 5f;
-        Vector3 targetPosition = Target.transform.position;
+        float delta = 5f;        
 
         if (Target)
         {
+            Vector3 targetPosition = Target.transform.position;
+
             //Debug.Log("has target");     
-            float targetdistance = Vector3.Distance(transform.position, Target.transform.position);
+            float targetdistance = Vector3.Distance(transform.position, targetPosition);
             if (targetdistance < 5)
             {
                 targetPosition = targetPosition + Target.GetComponent<Rigidbody>().velocity * Time.deltaTime;
