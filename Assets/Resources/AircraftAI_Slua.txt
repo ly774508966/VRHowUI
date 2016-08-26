@@ -19,23 +19,24 @@ local target
 
 local flyingTask = BT.Task:new()
 function flyingTask:run()
-  print("running")
+  print("flying")
 
   if target then
-   local distance = Vector3.Distance(ai.transform.position, target)
-   if (distance < 5) then
-     self:success()
-   else
-     self:running()
-   end
+    local distance = Vector3.Distance(ai.transform.position, target)
+    if (distance < 160) then
+      self:success()
+    else
+      self:running()
+    end
   else
      self:success()
   end
 end
 
 local targetTask = BT.Task:new()
-function flyingTask:run()
+function targetTask:run()
   print("targeting")
+
   local v = Random.onUnitSphere * 1000
   v.y = v.y + 1250
   controller:SetTarget(v)
@@ -43,8 +44,8 @@ function flyingTask:run()
   self:success()
 end
 
-BT.register('targeting', targetTask)
 BT.register('flying', flyingTask)
+BT.register('targeting', targetTask)
 
 local Frank = BT:new({
   tree = BT.Sequence:new({
@@ -71,7 +72,7 @@ function aiComponent:Start( gameObject )
 end
 
 function aiComponent:Update( gameObject )
-    Debug.Log(gameObject.name.."###Update")
+    -- Debug.Log(gameObject.name.."###Update")
 
     Frank:run();
 

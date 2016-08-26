@@ -19,8 +19,9 @@ public class MoverMissile : WeaponBase
 
 	private void Start ()
 	{
+        Speed = 80;
 		timeCount = Time.time;
-		Destroy (gameObject, LifeTime);
+		//Destroy (gameObject, LifeTime);
         Speed += GetComponent<Rigidbody>().velocity.magnitude;
         //GetComponent<Rigidbody>().velocity += new Vector3(transform.forward.x * Speed, transform.forward.y * Speed, transform.forward.z * Speed);
         //Debug.Log("Start speed " + Speed);

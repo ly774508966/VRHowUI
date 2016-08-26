@@ -33,8 +33,10 @@ public class Damage : DamageBase
     {
         if (Effect)
         {
-            GameObject obj = (GameObject) Instantiate(Effect, transform.position, transform.rotation);
-            Destroy(obj, 3);
+            //GameObject obj = (GameObject) Instantiate(Effect, transform.position, transform.rotation);
+            //Destroy(obj, 3);
+            GameObject obj = (GameObject)SimplePool.Spawn(Effect, transform.position, transform.rotation);
+            Despawn(obj, 3);
         }
 
         if (Explosive)
@@ -42,7 +44,8 @@ public class Damage : DamageBase
 
         if (!gameObject.CompareTag("Player"))
         {
-            Destroy(gameObject);
+            //Destroy(gameObject);
+            SimplePool.Despawn(gameObject);
         }
     }
 
@@ -86,5 +89,20 @@ public class Damage : DamageBase
             	Active();
         	}
 		}
+    }
+
+    private IEnumerator DelayDespawnFunction(GameObject obj, float delayTime)
+    {
+        yield return new WaitForSeconds(delayTime);
+
+        if (obj.activeSelf)
+        {
+            SimplePool.Despawn(obj);
+        }
+    }
+
+    private void Despawn(GameObject obj, float delay)
+    {
+        StartCoroutine(DelayDespawnFunction(obj, delay));
     }
 }

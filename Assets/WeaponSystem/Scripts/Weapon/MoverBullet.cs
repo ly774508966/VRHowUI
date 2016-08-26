@@ -10,7 +10,7 @@ public class MoverBullet : WeaponBase
 
     private void Start()
     {
-        Destroy(gameObject, Lifetime);
+        //Destroy(gameObject, Lifetime);
     }
 
     private void FixedUpdate()

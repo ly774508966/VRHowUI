@@ -26,7 +26,7 @@ public class Spawner : MonoBehaviour
 
 	private void SetReadyToSpawn () {
 		Ready = true;
-	}
+    }
 
 	private void Spawn () {
 		SpawnAll (ObjectSpawn, ObjectCount);
@@ -34,16 +34,18 @@ public class Spawner : MonoBehaviour
 
     private void Update()
     {
-		if (!Ready) {
-			return;
-		}
+        if (!Ready)
+        {
+            return;
+        }
 
-		if (KeepCount) {
-			SpawnAuto ();
-		}
+        if (KeepCount)
+        {
+            SpawnAuto();
+        }
     }
 
-	private void SpawnAuto () {
+    private void SpawnAuto () {
 		if(!ObjectSpawn)
 			return;
 		
@@ -77,9 +79,8 @@ public class Spawner : MonoBehaviour
 	}
 
 	private void SpawnOne (GameObject obj) {
-		GameObject enemyCreated = (GameObject)Instantiate(obj,transform.position +new Vector3(Random.Range(-Radiun, Radiun), Random.Range(-Radiun, Radiun), Random.Range(-Radiun, Radiun)),Quaternion.identity);
+		GameObject enemyCreated = (GameObject)Instantiate(obj,transform.position + new Vector3(Random.Range(-Radiun, Radiun), Random.Range(-Radiun, Radiun), Random.Range(-Radiun, Radiun)),Quaternion.identity);
 		float scale = Random.Range(5, 20);
 		enemyCreated.transform.localScale = new Vector3(scale, scale, scale);
 	}
-
 }

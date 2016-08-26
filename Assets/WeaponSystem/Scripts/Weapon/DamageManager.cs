@@ -51,7 +51,20 @@ public class DamageManager : MonoBehaviour
         if (Effect){
             Instantiate(Effect, transform.position, transform.rotation);
 		}
-        Destroy(this.gameObject);
+        //Destroy(this.gameObject);
+
+        if (this.gameObject.CompareTag ("Enemy"))
+        {
+            this.gameObject.transform.position = new Vector3(Random.Range(-1000, 1000), Random.Range(-1000, 1000) + 1250, Random.Range(-1000, 1000));
+        }
+        else if (this.gameObject.CompareTag("AI"))
+        {
+            this.gameObject.transform.position = new Vector3(Random.Range(-50, 50), Random.Range(-50, 50) + 50, Random.Range(-50, 50));
+        }
+        else if (this.gameObject.CompareTag("AI2"))
+        {
+            this.gameObject.transform.position = new Vector3(0, 0, 0);
+        }
     }
 
 }

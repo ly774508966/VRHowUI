@@ -28,12 +28,12 @@ public class Hud : MonoBehaviour {
     }
 	
 	// Update is called once per frame
-	void Update () {
-//        foreach (string key in scoreList.Keys)
-//        {
-//            Debug.Log(key + " : " + scoreList[key]);
-//        }
-    }
+//	void Update () {
+////        foreach (string key in scoreList.Keys)
+////        {
+////            Debug.Log(key + " : " + scoreList[key]);
+////        }
+//    }
 
     public void addScore (string tag, int score){
         foreach (string key in scoreList.Keys)

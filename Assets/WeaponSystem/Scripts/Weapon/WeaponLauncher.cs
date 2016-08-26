@@ -172,7 +172,7 @@ public class WeaponLauncher : WeaponBase
 		if (!ShowHUD)
 			return;
 
-        if ("AI".Equals(target.tag) || "AI2".Equals(target.tag))
+        if (target.CompareTag("AI") || target.CompareTag("AI2"))
         {
             return;
         }
@@ -254,11 +254,13 @@ public class WeaponLauncher : WeaponBase
 				}
 			
 				if (Muzzle) {
-					GameObject muzzle = (GameObject)GameObject.Instantiate (Muzzle, missileposition, missilerotate);
+                    //GameObject muzzle = (GameObject)GameObject.Instantiate (Muzzle, missileposition, missilerotate);
+                    GameObject muzzle = (GameObject)SimplePool.Spawn(Muzzle, missileposition, missilerotate);
                     muzzle.tag = this.tag;
 					muzzle.transform.parent = this.transform;
-					GameObject.Destroy (muzzle, MuzzleLifeTime);
-					if (MissileOuter.Length > 0) {
+                    //GameObject.Destroy (muzzle, MuzzleLifeTime);  
+                    Despawn (muzzle, MuzzleLifeTime);
+                    if (MissileOuter.Length > 0) {
 						muzzle.transform.parent = MissileOuter [currentOuter].transform;
 					}
 				}
@@ -318,4 +320,18 @@ public class WeaponLauncher : WeaponBase
 		
 	}
 
+    private IEnumerator DelayDespawnFunction(GameObject obj, float delayTime)
+    {
+        yield return new WaitForSeconds(delayTime);
+
+        if (obj.activeSelf)
+        {
+            SimplePool.Despawn(obj);
+        }
+    }
+
+    private void Despawn(GameObject obj, float delay)
+    {
+        StartCoroutine(DelayDespawnFunction(obj, delay));
+    }
 }
