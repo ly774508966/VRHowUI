@@ -172,7 +172,8 @@ public class WeaponLauncher : WeaponBase
 		if (!ShowHUD)
 			return;
 
-        if ("AI".Equals(target.tag)){
+        if ("AI".Equals(target.tag) || "AI2".Equals(target.tag))
+        {
             return;
         }
 
@@ -186,38 +187,40 @@ public class WeaponLauncher : WeaponBase
 		}
 	}
 
-	private void OnGUI ()
-	{
-		if (Seeker) {
-           
-			if (target) {
-				//DrawTargetLockon (target.transform, true);
-				//DrawTargetLockon (target, true);
-			}
-            
-			/*
-			for (int t=0; t<TargetTag.Length; t++) {
-				if (GameObject.FindGameObjectsWithTag (TargetTag [t]).Length > 0) {
-					GameObject[] objs = GameObject.FindGameObjectsWithTag (TargetTag [t]);
-					for (int i = 0; i < objs.Length; i++) {
-						if (objs [i]) {
-							Vector3 dir = (objs [i].transform.position - transform.position).normalized;
-							float direction = Vector3.Dot (dir, transform.forward);
-							if (direction >= AimDirection) {
-								float dis = Vector3.Distance (objs [i].transform.position, transform.position);
-								if (DistanceLock > dis) {
-									//DrawTargetLockon (objs [i].transform, false);
-									DrawTargetLockon (objs [i], false);
-								}
-							}
-						}
-					}
-				}
-			}
-			*/
-		}
 
-	}
+	//private void OnGUI ()
+	//{
+	//	if (Seeker) {
+           
+	//		if (target) {
+	//			//DrawTargetLockon (target.transform, true);
+	//			//DrawTargetLockon (target, true);
+	//		}
+            
+	//		/*
+	//		for (int t=0; t<TargetTag.Length; t++) {
+	//			if (GameObject.FindGameObjectsWithTag (TargetTag [t]).Length > 0) {
+	//				GameObject[] objs = GameObject.FindGameObjectsWithTag (TargetTag [t]);
+	//				for (int i = 0; i < objs.Length; i++) {
+	//					if (objs [i]) {
+	//						Vector3 dir = (objs [i].transform.position - transform.position).normalized;
+	//						float direction = Vector3.Dot (dir, transform.forward);
+	//						if (direction >= AimDirection) {
+	//							float dis = Vector3.Distance (objs [i].transform.position, transform.position);
+	//							if (DistanceLock > dis) {
+	//								//DrawTargetLockon (objs [i].transform, false);
+	//								DrawTargetLockon (objs [i], false);
+	//							}
+	//						}
+	//					}
+	//				}
+	//			}
+	//		}
+	//		*/
+	//	}
+
+	//}
+
 
 	private void Unlock ()
 	{

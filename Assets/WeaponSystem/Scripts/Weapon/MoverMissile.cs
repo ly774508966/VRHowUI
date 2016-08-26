@@ -28,12 +28,22 @@ public class MoverMissile : WeaponBase
 
     private void FixedUpdate ()
 	{
+        float delta = 5f;
+        Vector3 targetPosition = Target.transform.position;
+
         if (Target)
         {
-            //Debug.Log("has target");
-            Quaternion rotation = Quaternion.LookRotation(Target.transform.position - transform.transform.position);
+            //Debug.Log("has target");     
+            float targetdistance = Vector3.Distance(transform.position, Target.transform.position);
+            if (targetdistance < 5)
+            {
+                targetPosition = targetPosition + Target.GetComponent<Rigidbody>().velocity * Time.deltaTime;
+            }
+
+            Quaternion rotation = Quaternion.LookRotation(targetPosition - transform.transform.position);
             //transform.rotation = Quaternion.Slerp (transform.rotation, rotation, Time.fixedDeltaTime * Damping);
-            transform.rotation = Quaternion.Lerp(transform.rotation, rotation, Time.fixedDeltaTime * 5);
+            transform.rotation = Quaternion.Lerp(transform.rotation, rotation, Time.fixedDeltaTime * delta);
+
             Vector3 dir = (Target.transform.position - transform.position).normalized;
             float direction = Vector3.Dot(dir, transform.forward);
             if (direction < TargetLockDirection)
@@ -47,7 +57,7 @@ public class MoverMissile : WeaponBase
             }
         }
 
-        GetComponent<Rigidbody>().velocity = Vector3.Lerp(GetComponent<Rigidbody>().velocity, transform.forward * Speed, Time.fixedDeltaTime * 5);
+        GetComponent<Rigidbody>().velocity = Vector3.Lerp(GetComponent<Rigidbody>().velocity, transform.forward * Speed, Time.fixedDeltaTime * delta);
         //GetComponent<Rigidbody>().velocity += new Vector3 (transform.forward.x * Speed * Time.fixedDeltaTime, transform.forward.y * Speed * Time.fixedDeltaTime, transform.forward.z * Speed * Time.fixedDeltaTime);
         //GetComponent<Rigidbody>().velocity += transform.TransformDirection(Vector3.forward * Speed * Time.fixedDeltaTime);
         //GetComponent<Rigidbody>().velocity += new Vector3 (Random.Range (-Noise.x, Noise.x), Random.Range (-Noise.y, Noise.y), Random.Range (-Noise.z, Noise.z));
