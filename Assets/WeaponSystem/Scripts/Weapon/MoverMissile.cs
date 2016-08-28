@@ -21,10 +21,26 @@ public class MoverMissile : WeaponBase
 	{
         Speed = 80;
 		timeCount = Time.time;
-		//Destroy (gameObject, LifeTime);
+        Destroy (gameObject, LifeTime);
+        //Despawn (gameObject, LifeTime);
         Speed += GetComponent<Rigidbody>().velocity.magnitude;
         //GetComponent<Rigidbody>().velocity += new Vector3(transform.forward.x * Speed, transform.forward.y * Speed, transform.forward.z * Speed);
         //Debug.Log("Start speed " + Speed);
+    }
+
+    private IEnumerator DelayDespawnFunction(GameObject obj, float delayTime)
+    {
+        yield return new WaitForSeconds(delayTime);
+
+        if (obj.activeSelf)
+        {
+            SimplePool.Despawn(obj);
+        }
+    }
+
+    private void Despawn(GameObject obj, float delay)
+    {
+        StartCoroutine(DelayDespawnFunction(obj, delay));
     }
 
     private void FixedUpdate ()
@@ -45,6 +61,7 @@ public class MoverMissile : WeaponBase
             Quaternion rotation = Quaternion.LookRotation(targetPosition - transform.transform.position);
             //transform.rotation = Quaternion.Slerp (transform.rotation, rotation, Time.fixedDeltaTime * Damping);
             transform.rotation = Quaternion.Lerp(transform.rotation, rotation, Time.fixedDeltaTime * delta);
+			//transform.rotation = rotation;
 
             Vector3 dir = (Target.transform.position - transform.position).normalized;
             float direction = Vector3.Dot(dir, transform.forward);

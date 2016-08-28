@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using System.Collections;
 using Random = UnityEngine.Random;
+using System.Collections.Generic;
 
 [RequireComponent(typeof(AudioSource))]
 
@@ -49,7 +50,8 @@ public class WeaponLauncher : WeaponBase
 	private Color lockedColor = new Color ();
 	private Color unlockColor = new Color ();
 
-	
+	private List<GameObject> objs = new List<GameObject>();
+
 	private void Start ()
 	{
 		if (!Owner) 
@@ -67,6 +69,21 @@ public class WeaponLauncher : WeaponBase
 
 //		Debug.Log ("lockedColor " + lockedColor.ToString());
 //		Debug.Log ("unlockColor " + unlockColor.ToString());
+
+		if (Seeker) {
+			Invoke("getTargetObjects", 20);
+		}
+	}
+
+	private void getTargetObjects () {
+		for (int t=0; t<TargetTag.Length; t++) {
+			GameObject[] tObjs = GameObject.FindGameObjectsWithTag (TargetTag [t]);
+			if (tObjs.Length > 0) {
+				for (int i = 0; i < tObjs.Length; i++) {
+                    objs.Add(tObjs[i]);
+				}
+			}
+		}
 	}
 
 	private void Update ()
@@ -75,31 +92,60 @@ public class WeaponLauncher : WeaponBase
 			TorqueObject.transform.Rotate (torqueTemp * Time.deltaTime);
 			torqueTemp = Vector3.Lerp (torqueTemp, Vector3.zero, Time.deltaTime);
 		}
+
 		if (Seeker) {
-			for (int t=0; t<TargetTag.Length; t++) {
-				if (GameObject.FindGameObjectsWithTag (TargetTag [t]).Length > 0) {
-					GameObject[] objs = GameObject.FindGameObjectsWithTag (TargetTag [t]);
-					float distance = int.MaxValue;
-					for (int i = 0; i < objs.Length; i++) {
-						if (objs [i]) {
-							Vector3 dir = (objs [i].transform.position - transform.position).normalized;
-							float direction = Vector3.Dot (dir, transform.forward);
-							float dis = Vector3.Distance (objs [i].transform.position, transform.position);
-							if (direction >= AimDirection) {
-								if (DistanceLock > dis) {
-									if (distance > dis) {
-										if (timetolockcount + TimeToLock < Time.time) {	
-											distance = dis;
-											target = objs [i];
-										}
-									}
-								}
-							}
-						}
-					}
-				}
-			}
-		}
+            float distance = int.MaxValue;
+            for (int t=0; t < objs.Count; t++)
+            {
+                GameObject o = objs[t];
+
+                if (o)
+                {
+
+                    Vector3 dir = (o.transform.position - transform.position).normalized;
+                    float direction = Vector3.Dot(dir, transform.forward);
+                    float dis = Vector3.Distance(o.transform.position, transform.position);
+                    if (direction >= AimDirection)
+                    {
+                        if (DistanceLock > dis)
+                        {
+                            if (distance > dis)
+                            {
+                                if (timetolockcount + TimeToLock < Time.time)
+                                {
+                                    distance = dis;
+                                    target = o;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            //for (int t=0; t<TargetTag.Length; t++) {
+            //	if (GameObject.FindGameObjectsWithTag (TargetTag [t]).Length > 0) {
+            //		GameObject[] objs = GameObject.FindGameObjectsWithTag (TargetTag [t]);
+            //		float distance = int.MaxValue;
+            //		for (int i = 0; i < objs.Length; i++) {
+            //			if (objs [i]) {
+            //				Vector3 dir = (objs [i].transform.position - transform.position).normalized;
+            //				float direction = Vector3.Dot (dir, transform.forward);
+            //				float dis = Vector3.Distance (objs [i].transform.position, transform.position);
+            //				if (direction >= AimDirection) {
+            //					if (DistanceLock > dis) {
+            //						if (distance > dis) {
+            //							if (timetolockcount + TimeToLock < Time.time) {	
+            //								distance = dis;
+            //								target = objs [i];
+            //							}
+            //						}
+            //					}
+            //				}
+            //			}
+            //		}
+            //	}
+            //}
+        }
+
 		if (target) {
 			float targetdistance = Vector3.Distance (transform.position, target.transform.position);
 			Vector3 dir = (target.transform.position - transform.position).normalized;
@@ -273,6 +319,7 @@ public class WeaponLauncher : WeaponBase
 					
 					
 						GameObject bullet = (GameObject)Instantiate (Missile, missileposition, missilerotate);
+                        //GameObject bullet = (GameObject)SimplePool.Spawn(Missile, missileposition, missilerotate);
                         bullet.tag = this.tag;
 					
 						if (bullet.GetComponent<DamageBase> ()) {

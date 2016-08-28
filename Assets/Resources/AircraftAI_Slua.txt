@@ -19,7 +19,7 @@ local target
 
 local flyingTask = BT.Task:new()
 function flyingTask:run()
-  print("flying")
+  -- print("flying")
 
   if target then
     local distance = Vector3.Distance(ai.transform.position, target)
@@ -35,7 +35,7 @@ end
 
 local targetTask = BT.Task:new()
 function targetTask:run()
-  print("targeting")
+  -- print("targeting")
 
   local v = Random.onUnitSphere * 1000
   v.y = v.y + 1250
